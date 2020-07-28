@@ -26,12 +26,16 @@ using namespace ff_dynamic;
 
 int main(int argc, char **argv) {
     testInit(argv[0]);
-    if (argc != 3) {
-        LOG(ERROR) << "Usage: mixTest url1 url2";
-        return -1;
-    }
+    //if (argc != 3) {
+    //    LOG(ERROR) << "Usage: mixTest url1 url2";
+    //    return -1;
+    //}
     string inUrl1(argv[1]);
     string inUrl2(argv[2]);
+  
+    string outUrl1(argv[3]);
+    string outUrl2(argv[4]);
+
     LOG(INFO) << "starting test: " << inUrl1 << " & " << inUrl2;
 
     // 1. create demux and get stream info
@@ -49,15 +53,21 @@ int main(int argc, char **argv) {
 
     // 4. video encode
     DavWaveOption videoEncodeOption((DavWaveClassVideoEncode()));
-    videoEncodeOption.setVideoSize(1920, 1080);
-    videoEncodeOption.setAVRational("framerate", {30000, 1001});
+    videoEncodeOption.setVideoSize(960,540);
+    videoEncodeOption.setAVRational("framerate", {25, 1});
     // 5. audio encode
     DavWaveOption audioEncodeOption((DavWaveClassAudioEncode()));
     // 6. mux1 & mux2
     DavWaveOption muxOption1((DavWaveClassMux()));
-    muxOption1.set(DavOptionOutputUrl(), "mix.flv");
+   // muxOption1.set(DavOptionOutputUrl(), "mix.flv");
+    muxOption1.set(DavOptionOutputUrl(), outUrl1);
+    muxOption1.set(DavOptionContainerFmt(), "flv");
+   
     DavWaveOption muxOption2((DavWaveClassMux()));
-    muxOption2.set(DavOptionOutputUrl(), "mix.mp4");
+    //muxOption2.set(DavOptionOutputUrl(), "mix.mp4");
+    muxOption2.set(DavOptionOutputUrl(), outUrl2);
+    muxOption2.set(DavOptionContainerFmt(), "flv");
+    
     // 7. audio mix
     DavWaveOption audioMixOption((DavWaveClassAudioMix()));
     audioMixOption.setBool("b_mute_at_start", false);
@@ -65,8 +75,8 @@ int main(int argc, char **argv) {
     // 8. video mix
     DavWaveOption videoMixOption((DavWaveClassVideoMix()));
     videoMixOption.setBool(DavOptionVideoMixStartAfterAllJoin(), true);
-    videoMixOption.setAVRational("framerate", {30, 1});
-    videoMixOption.setVideoSize(1280, 720);
+    videoMixOption.setAVRational("framerate", {25, 1});
+    videoMixOption.setVideoSize(960,540);
 
     ////////////////////////////////////////////////////////////////////////////
     DavDefaultInputStreamletBuilder inputBuilder1;

@@ -63,8 +63,8 @@ int FFmpegDemux::onConstruct() {
     m_options.getInt(DavOptionRWTimeout(), m_rwTimeoutMs);
 
     m_fmtCtx = avformat_alloc_context();
-    CHECK(m_fmtCtx != nullptr) << "Fail alloate fmt context";
-
+     CHECK(m_fmtCtx != nullptr) << "Fail alloate fmt context";
+    m_fmtCtx->protocol_whitelist = "file,udp,rtp,rtmp,tcp,http,rtsp";
     hardSettings();
     ret = avformat_open_input(&m_fmtCtx, m_inputUrl.c_str(), nullptr, m_options.get());
     if (ret < 0) {

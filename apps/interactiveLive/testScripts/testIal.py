@@ -37,16 +37,35 @@ uri_update_mix_setting = "/api1/ial/update_mix_setting"
 out_setting_id_720p = "720p_2000kb"
 out_setting_id_1080p = "1080p_4000kb"
 out_setting_id_udp_720p = "udp_720p"
+out_setting_id_720p_4M = "720p_4000kb"
 
 # chnage to your files
-input1 = "/home/ubuntu/testfile/test1.mp4"
-input2 = "/home/ubuntu/testfile/test2.mp4"
-input3 = "/home/ubuntu/testfile/test3.mp4"
+#input1 = "/home/ubuntu/testfile/test1.mp4"
+#input2 = "/home/ubuntu/testfile/test2.mp4"
+#input3 = "/home/ubuntu/testfile/test3.mp4"
+input1 = "/home/ubuntu/testfile/video.sdp"
+#input1 = "udp://127.0.0.1:9560"
+#input1 = "http://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/gear2/prog_index.m3u8"
+#input1 = "rtmp://49.232.189.68:1935/100doc/streamtest_in_001"
+input2 = "rtmp://49.232.189.68:1935/100doc/streamtest_in_002"
+input3 = "rtmp://49.232.189.68:1935/100doc/streamtest_in_003"
+input4 = "rtmp://49.232.189.68:1935/100doc/streamtest_in_004"
 
-output_dir = "/home/ubuntu/outputfile" #"../testScripts"
-fullurl_output_720 = "output_720p.flv"
+#input2 = "udp://127.0.0.1:9570"
+#input3 = "udp://127.0.0.1:9580"
+
+
+#output_dir = "./" #"../testScripts"
+fullurl_output_720 = "/home/ubuntu/outputfile/output_720p.flv"
+#fullurl_output_720 = "rtmp://49.232.189.68:1935/100doc/streamtestout"
 fullurl_output_1080 = "output_1080p.flv"
 fullurl_output_udp_720 = "udp://127.0.0.1:12345"
+
+fullurl_output_rtmp_720_1 = "rtmp://49.232.189.68:1935/100doc/streamtest_out_001"
+fullurl_output_rtmp_720_2 = "rtmp://49.232.189.68:1935/100doc/streamtest_out_002"
+fullurl_output_rtmp_720_3 = "rtmp://49.232.189.68:1935/100doc/streamtest_out_003"
+fullurl_output_rtmp_720_4 = "rtmp://49.232.189.68:1935/100doc/streamtest_out_004"
+
 
 def get_new_output(output_setting_id, output_full_url):
     new_output = ial_request.AddNewOutputStream()
@@ -74,8 +93,8 @@ def sendCreateRoom():
     create_room = ial_request.CreateRoom()
     create_room.room_id = "ial_test"
     create_room.input_urls.append(input1)
-    #create_room.input_urls.append()
-    create_room.room_output_base_url = output_dir
+    #create_room.input_urls.append(input2)
+   # create_room.room_output_base_url = output_dir
     new_output = create_room.output_stream_infos.add()
     new_output.output_setting_id = out_setting_id_720p
     new_output.output_urls.append(fullurl_output_720)

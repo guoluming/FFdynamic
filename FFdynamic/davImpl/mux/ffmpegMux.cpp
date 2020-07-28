@@ -47,6 +47,9 @@ int FFmpegMux::onDynamicallyInitializeViaTravelStatic(DavProcCtx & ctx) {
         ERRORIT(ret, "failed create mux format context: " + m_outputUrl);
         return ret;
     }
+
+    INFOIT(ret, "FFmpegMux::onDynamicallyInitializeViaTravelStaticx   create mux format context: [outFmt]" +outFmt+" [m_outputUrl]"+ m_outputUrl);
+
     recordUnusedOpts();
 
     /* add streams */
@@ -93,7 +96,11 @@ int FFmpegMux::onDynamicallyInitializeViaTravelStatic(DavProcCtx & ctx) {
         }
         pkt->stream_index = m_muxStreamsMap.at(buf->getAddress())->index;
         ret = av_interleaved_write_frame(m_fmtCtx, pkt);
-        av_packet_free(&pkt);
+
+        LOG(INFO) <<"FFmpegMux::onDynamicallyInitializeViaTravelStatic av_interleaved_write_frame  pts= "<<pkt->pts<< " dts=" << pkt->dts <<" index="<<pkt->stream_index<<" pos="<<pkt->pos;
+
+    	ret = av_interleaved_write_frame(m_fmtCtx, pkt);
+    	av_packet_free(&pkt);
         m_preInitCacheInBufs.pop_front();
         if (ret < 0) {
             ERRORIT(ret, "mux do interleave write fail");
@@ -143,7 +150,11 @@ int FFmpegMux::onProcess(DavProcCtx & ctx) {
     else
         pkt->stream_index = m_muxStreamsMap.at(ctx.m_inBuf->getAddress())->index;
 
-    int ret = av_interleaved_write_frame(m_fmtCtx, pkt);
+    
+    LOG(INFO) <<"FFmpegMux::onProcess   av_interleaved_write_frame pts= "<<pkt->pts<< " dts=" << pkt->dts <<" index="<<pkt->stream_index <<" pos= "<<pkt->pos;    
+   
+   int ret = av_interleaved_write_frame(m_fmtCtx, pkt);
+   
     if (ret < 0) {
         m_outputDiscardCount++;
         // TODO: potential bug here: if pkt == null (flush packet), we shouldn't return here.

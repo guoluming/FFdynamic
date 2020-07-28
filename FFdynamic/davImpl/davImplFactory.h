@@ -55,11 +55,11 @@ public:
         static bool bFFmpegInited = false;
         if (!bFFmpegInited) {
             bFFmpegInited = true;
-            #if (LIBAVFORMAT_VERSION_MAJOR < 58)
+           // #if (LIBAVFORMAT_VERSION_MAJOR < 58)
             av_register_all();
             avfilter_register_all();
             avformat_network_init();
-            #endif
+            //#endif
         }
         /* create implementation instance */
         try {

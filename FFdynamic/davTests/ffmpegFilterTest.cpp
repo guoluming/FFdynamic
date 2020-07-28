@@ -26,7 +26,8 @@ using namespace global_sighandle;
 int main(int argc, char **argv) {
     testInit(argv[0]);
 
-    string inUrl = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
+//    string inUrl = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
+    string inUrl="1.sdp";
     if (argc >= 2)
         inUrl = argv[1];
 
