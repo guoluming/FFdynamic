@@ -97,9 +97,8 @@ int FFmpegMux::onDynamicallyInitializeViaTravelStatic(DavProcCtx & ctx) {
         pkt->stream_index = m_muxStreamsMap.at(buf->getAddress())->index;
         ret = av_interleaved_write_frame(m_fmtCtx, pkt);
 
-        LOG(INFO) <<"FFmpegMux::onDynamicallyInitializeViaTravelStatic av_interleaved_write_frame  pts= "<<pkt->pts<< " dts=" << pkt->dts <<" index="<<pkt->stream_index<<" pos="<<pkt->pos;
+//        LOG(INFO) <<"FFmpegMux::onDynamicallyInitializeViaTravelStatic av_interleaved_write_frame  pts= "<<pkt->pts<< " dts=" << pkt->dts <<" index="<<pkt->stream_index<<" pos="<<pkt->pos;
 
-    	ret = av_interleaved_write_frame(m_fmtCtx, pkt);
     	av_packet_free(&pkt);
         m_preInitCacheInBufs.pop_front();
         if (ret < 0) {
@@ -151,7 +150,7 @@ int FFmpegMux::onProcess(DavProcCtx & ctx) {
         pkt->stream_index = m_muxStreamsMap.at(ctx.m_inBuf->getAddress())->index;
 
     
-    LOG(INFO) <<"FFmpegMux::onProcess   av_interleaved_write_frame pts= "<<pkt->pts<< " dts=" << pkt->dts <<" index="<<pkt->stream_index <<" pos= "<<pkt->pos;    
+  //  LOG(INFO) <<"FFmpegMux::onProcess   av_interleaved_write_frame pts= "<<pkt->pts<< " dts=" << pkt->dts <<" index="<<pkt->stream_index <<" pos= "<<pkt->pos;    
    
    int ret = av_interleaved_write_frame(m_fmtCtx, pkt);
    
