@@ -35,7 +35,7 @@
   },
 
   "output_settings" : {
-    "720p_2000kb" : {
+    "720p_2000kb_1" : {
       "video_encode" : {
         "encode_type": "ffmpeg",
         "codec_name": "libx264",
@@ -57,6 +57,96 @@
         {"mux_type" : "ffmpeg", "mux_fmt" : "flv", "avdict_mux_option" : {}}
       ]
     },
+"720p_2000kb_2" : {
+      "video_encode" : {
+        "encode_type": "ffmpeg",
+        "codec_name": "libx264",
+        "fps_num" : 25,
+        "fps_den" : 1,
+        "avdict_encode_option": {"video_size" : "1280x720", "bufsize" : "2000k", "maxrate" : "2000k",
+                                 "preset" : "fast", "g" : "60", "rc-lookahead" : "30"}
+      },
+      "audio_encode" : {
+        "encode_type" : "ffmpeg",
+        "codec_name" : "aac",
+        "avdict_encode_option" : {"ac" : "2", "ab" : "128k", "ar" : "48000"}
+      },
+
+      "pre_encode_video_filter" : {},
+      "pre_encode_audio_filter" : {"filter_type" : "ffmpeg",
+                                   "filter_arg" : "acrossfade=d=10:o=0:c1=exp:c2=exp"},
+      "mux_outputs" : [
+        {"mux_type" : "ffmpeg", "mux_fmt" : "flv", "avdict_mux_option" : {}}
+      ]
+    },
+    "720p_2000kb_3" : {
+      "video_encode" : {
+        "encode_type": "ffmpeg",
+        "codec_name": "libx264",
+        "fps_num" : 25,
+        "fps_den" : 1,
+        "avdict_encode_option": {"video_size" : "1280x720", "bufsize" : "2000k", "maxrate" : "2000k",
+                                 "preset" : "fast", "g" : "60", "rc-lookahead" : "30"}
+      },
+      "audio_encode" : {
+        "encode_type" : "ffmpeg",
+        "codec_name" : "aac",
+        "avdict_encode_option" : {"ac" : "2", "ab" : "128k", "ar" : "48000"}
+      },
+
+      "pre_encode_video_filter" : {},
+      "pre_encode_audio_filter" : {"filter_type" : "ffmpeg",
+                                   "filter_arg" : "acrossfade=d=10:o=0:c1=exp:c2=exp"},
+      "mux_outputs" : [
+        {"mux_type" : "ffmpeg", "mux_fmt" : "flv", "avdict_mux_option" : {}}
+      ]
+    },
+    "720p_2000kb_4" : {
+      "video_encode" : {
+        "encode_type": "ffmpeg",
+        "codec_name": "libx264",
+        "fps_num" : 25,
+        "fps_den" : 1,
+        "avdict_encode_option": {"video_size" : "1280x720", "bufsize" : "2000k", "maxrate" : "2000k",
+                                 "preset" : "fast", "g" : "60", "rc-lookahead" : "30"}
+      },
+      "audio_encode" : {
+        "encode_type" : "ffmpeg",
+        "codec_name" : "aac",
+        "avdict_encode_option" : {"ac" : "2", "ab" : "128k", "ar" : "48000"}
+      },
+
+      "pre_encode_video_filter" : {},
+      "pre_encode_audio_filter" : {"filter_type" : "ffmpeg",
+                                   "filter_arg" : "acrossfade=d=10:o=0:c1=exp:c2=exp"},
+      "mux_outputs" : [
+        {"mux_type" : "ffmpeg", "mux_fmt" : "flv", "avdict_mux_option" : {}}
+      ]
+    },
+
+"720p_2000kb_5" : {
+      "video_encode" : {
+        "encode_type": "ffmpeg",
+        "codec_name": "libx264",
+        "fps_num" : 25,
+        "fps_den" : 1,
+        "avdict_encode_option": {"video_size" : "1280x720", "bufsize" : "2000k", "maxrate" : "2000k",
+                                 "preset" : "fast", "g" : "60", "rc-lookahead" : "30"}
+      },
+      "audio_encode" : {
+        "encode_type" : "ffmpeg",
+        "codec_name" : "aac",
+        "avdict_encode_option" : {"ac" : "2", "ab" : "128k", "ar" : "48000"}
+      },
+
+      "pre_encode_video_filter" : {},
+      "pre_encode_audio_filter" : {"filter_type" : "ffmpeg",
+                                   "filter_arg" : "acrossfade=d=10:o=0:c1=exp:c2=exp"},
+      "mux_outputs" : [
+        {"mux_type" : "ffmpeg", "mux_fmt" : "flv", "avdict_mux_option" : {}}
+      ]
+    },
+
 
     "udp_720p" : {
       "video_encode" : {

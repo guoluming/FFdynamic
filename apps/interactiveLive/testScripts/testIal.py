@@ -34,7 +34,11 @@ uri_update_input_setting = "/api1/ial/update_input_setting"
 uri_add_output_setting = "/api1/ial/add_output_setting"
 uri_update_mix_setting = "/api1/ial/update_mix_setting"
 
-out_setting_id_720p = "720p_2000kb"
+out_setting_id_720p_1 = "720p_2000kb_1"
+out_setting_id_720p_2 = "720p_2000kb_2"
+out_setting_id_720p_3 = "720p_2000kb_3"
+out_setting_id_720p_4 = "720p_2000kb_4"
+
 out_setting_id_1080p = "1080p_4000kb"
 out_setting_id_udp_720p = "udp_720p"
 out_setting_id_720p_4M = "720p_4000kb"
@@ -50,7 +54,7 @@ input1 = "rtmp://49.232.189.68:1935/100doc/streamtest_in_001"
 input2 = "rtmp://49.232.189.68:1935/100doc/streamtest_in_002"
 input3 = "rtmp://49.232.189.68:1935/100doc/streamtest_in_003"
 input4 = "rtmp://49.232.189.68:1935/100doc/streamtest_in_004"
-
+input5 = "rtmp://49.232.189.68:1935/100doc/streamtest_in_005"
 #input2 = "udp://127.0.0.1:9570"
 #input3 = "udp://127.0.0.1:9580"
 
@@ -93,12 +97,29 @@ def sendCreateRoom():
     create_room = ial_request.CreateRoom()
     create_room.room_id = "ial_test"
     create_room.input_urls.append(input1)
-    #create_room.input_urls.append(input2)
+    create_room.input_urls.append(input2)
+    create_room.input_urls.append(input3)
+    create_room.input_urls.append(input4)
+    create_room.input_urls.append(input5)
+   
+   
    # create_room.room_output_base_url = output_dir
-    new_output = create_room.output_stream_infos.add()
-    new_output.output_setting_id = out_setting_id_720p
-    new_output.output_urls.append(fullurl_output_720)
+    new_output1 = create_room.output_stream_infos.add() 
+    new_output1.output_setting_id = out_setting_id_720p_1
+    new_output1.output_urls.append(fullurl_output_rtmp_720_1)
 
+    new_output2 = create_room.output_stream_infos.add()
+    new_output2.output_setting_id = out_setting_id_720p_2
+    new_output2.output_urls.append(fullurl_output_rtmp_720_2)
+
+    new_output3 = create_room.output_stream_infos.add()
+    new_output3.output_setting_id = out_setting_id_720p_3
+    new_output3.output_urls.append(fullurl_output_rtmp_720_3)
+
+    new_output4 = create_room.output_stream_infos.add()
+    new_output4.output_setting_id = out_setting_id_720p_4
+    new_output4.output_urls.append(fullurl_output_rtmp_720_4)
+   
     response = request("POST", http_dst + uri_create_room, data = MessageToJson(create_room))
     print (response.url, response.text)
 
@@ -119,12 +140,16 @@ def addNewInput():
 
 def addNewOutput():
     new_output = ial_request.AddNewOutput()
-    choise = input("Enter choise 1, for 1080p output setting; 2, for udp 720p setting: ")
+    #choise = input("Enter choise 1, for 1080p output setting; 2, for udp 720p setting: ")
+    #if choise == 1:
+     #   new_output.output_setting_id = out_setting_id_1080p
+    #elif choise == 2:
+    #    new_output.output_setting_id = out_setting_id_udp_720p
+    #    new_output.output_urls.append(fullurl_output_udp_719)
+    choise = input("Enter choise 1,  ")
     if choise == 1:
-        new_output.output_setting_id = out_setting_id_1080p
-    elif choise == 2:
-        new_output.output_setting_id = out_setting_id_udp_720p
-        new_output.output_urls.append(fullurl_output_udp_720)
+        new_output.output_setting_id = out_setting_id_720p_1
+        new_output.output_urls.append(fullurl_output_rtmp_720_3)
     else:
         print ("not valid choise " + choise + ", do nothing")
         return
