@@ -60,6 +60,8 @@ input5 = "rtmp://49.232.189.68:1935/100doc/streamtest_in_005"
 ##
 ##
 
+
+
 #output_dir = "./" #"../testScripts"
 #fullurl_output_720 = "/home/ubuntu/outputfile/output_720p.flv"
 fullurl_output_720 = "rtmp://49.232.189.68:1935/100doc/streamtestout"
@@ -141,16 +143,12 @@ def addNewInput():
 
 def addNewOutput():
     new_output = ial_request.AddNewOutput()
-    #choise = input("Enter choise 1, for 1080p output setting; 2, for udp 720p setting: ")
-    #if choise == 1:
-     #   new_output.output_setting_id = out_setting_id_1080p
-    #elif choise == 2:
-    #    new_output.output_setting_id = out_setting_id_udp_720p
-    #    new_output.output_urls.append(fullurl_output_udp_719)
-    choise = input("Enter choise 1,  ")
+    choise = input("Enter choise 1, for 1080p output setting; 2, for udp 720p setting: ")
     if choise == 1:
-        new_output.output_setting_id = out_setting_id_720p_1
-        new_output.output_urls.append(fullurl_output_rtmp_720_3)
+       new_output.output_setting_id = out_setting_id_1080p
+    elif choise == 2:
+       new_output.output_setting_id = out_setting_id_udp_720p
+       new_output.output_urls.append(fullurl_output_udp_719)
     else:
         print ("not valid choise " + choise + ", do nothing")
         return
